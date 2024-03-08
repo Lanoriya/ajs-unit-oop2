@@ -39,6 +39,24 @@ export default class Character {
         break;
     }
   }
+  
+  levelUp() {
+    if (this.health !== 0) {
+      this.level++;
+      this.attack = (this.attack / 100) * 20 + this.attack;
+      this.defence = (this.defence / 100) * 20 + this.defence;
+      this.health = 100;
+      return;
+    } else {
+      throw new Error("Нельзя повысить лвл умершего");
+    }
+  }
+
+  damage(points) {
+    if (this.health >= 0) {
+      this.health -= points * (1 - this.defence / 100);
+    }
+  }
 }
 
 export class Bowman extends Character {
